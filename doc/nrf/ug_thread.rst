@@ -38,6 +38,11 @@ This can be done per platform, while retaining the ability to default to a stand
 
 .. _thread_ug_supported features:
 
+Integration with Zephyr
+***********************
+
+To understand how exactly OpenThread L2 is integrated with the Zephyr RTOS please follow :ref:`openthread_integration`.
+
 Supported features
 ******************
 
