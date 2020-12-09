@@ -389,7 +389,7 @@ int ipc_init(struct ipc_inst_t         * p_ipm,
     p_ipm->ipm_tx_handle = device_get_binding(p_config->ipm_name_tx);
     if (!p_ipm->ipm_tx_handle)
     {
-        LOG_ERR("Could not get TX IPM device handle");
+        LOG_ERR("Could not get TX IPM device handle, multi");
         return -ENODEV;
     }
 
@@ -695,18 +695,18 @@ int ipc_recv(struct ipc_inst_t * p_ipm, void * payload)
     return 0;
 }
 
-static int ipc_config_verify(const struct device *unused)
-{
-	ARG_UNUSED(unused);
+// static int ipc_config_verify(const struct device *unused)
+// {
+// 	ARG_UNUSED(unused);
 
-	LOG_INF("IPC Configuration verification");
+// 	LOG_INF("IPC Configuration verification");
 
-	Z_STRUCT_SECTION_FOREACH(ipc_config_t, ipc_config) {
-		LOG_INF("%s IPC configuration registered", ipc_config->name);
-	}
-	//k_oops();
+// 	Z_STRUCT_SECTION_FOREACH(ipc_config_t, ipc_config) {
+// 		LOG_INF("%s IPC configuration registered", ipc_config->name);
+// 	}
+// 	//k_oops();
 
-	return 0;
-}
+// 	return 0;
+// }
 
-SYS_INIT(ipc_config_verify, POST_KERNEL, 30);
+//SYS_INIT(ipc_config_verify, POST_KERNEL, 30);
