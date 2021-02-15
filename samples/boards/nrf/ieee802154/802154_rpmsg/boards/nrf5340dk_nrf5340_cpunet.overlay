@@ -1,0 +1,35 @@
+/* Copyright (c) 2020 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ */
+ 
+&uart0 {
+	status = "disabled";
+};
+&ecb {
+	status = "disabled";
+};
+&gpio0 {
+	status = "disabled";
+};
+&gpio1 {
+	status = "disabled";
+};
+&i2c0 { 
+	status = "disabled";
+};
+&rtc1 {
+	status = "disabled";
+};
+&spi0 {
+	status = "disabled";
+};
+&timer1 {
+	status = "disabled";
+};
+&timer2 {
+	status = "disabled";
+};
+&wdt {
+	status = "disabled";
+};
