@@ -23,9 +23,11 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME, CONFIG_OPENTHREAD_L2_LOG_LEVEL);
 
 #include <kernel.h>
 #include <device.h>
+#include <kernel/thread.h>
 #include <net/ieee802154_radio.h>
 #include <net/net_pkt.h>
 #include <sys/__assert.h>
+
 
 #include <openthread/ip6.h>
 #include <openthread-system.h>
@@ -35,6 +37,12 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME, CONFIG_OPENTHREAD_L2_LOG_LEVEL);
 #include <openthread/message.h>
 
 #include "platform-zephyr.h"
+
+#if defined(FP_GUARD_EXTRA_SIZE)
+#define OT_RADIO_STACK_SIZE (CONFIG_OPENTHREAD_RADIO_WORKQUEUE_STACK_SIZE + FP_GUARD_EXTRA_SIZE)
+#else
+#define OT_RADIO_STACK_SIZE CONFIG_OPENTHREAD_RADIO_WORKQUEUE_STACK_SIZE
+#endif
 
 #define SHORT_ADDRESS_SIZE 2
 
@@ -86,8 +94,7 @@ static uint8_t energy_detection_channel;
 static int16_t energy_detected_value;
 
 ATOMIC_DEFINE(pending_events, PENDING_EVENT_COUNT);
-K_KERNEL_STACK_DEFINE(ot_task_stack,
-		      CONFIG_OPENTHREAD_RADIO_WORKQUEUE_STACK_SIZE);
+K_KERNEL_STACK_DEFINE(ot_task_stack, OT_RADIO_STACK_SIZE);
 static struct k_work_q ot_work_q;
 static otError rx_result;
 static otError tx_result;

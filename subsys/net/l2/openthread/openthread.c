@@ -15,6 +15,7 @@ LOG_MODULE_REGISTER(net_l2_openthread, CONFIG_OPENTHREAD_L2_LOG_LEVEL);
 #include <net_private.h>
 
 #include <init.h>
+#include <kernel/thread.h>
 #include <sys/util.h>
 #include <sys/__assert.h>
 #include <version.h>
@@ -37,7 +38,11 @@ LOG_MODULE_REGISTER(net_l2_openthread, CONFIG_OPENTHREAD_L2_LOG_LEVEL);
 
 #include "openthread_utils.h"
 
-#define OT_STACK_SIZE (CONFIG_OPENTHREAD_THREAD_STACK_SIZE)
+#if defined(FP_GUARD_EXTRA_SIZE)
+#define OT_STACK_SIZE (CONFIG_OPENTHREAD_THREAD_STACK_SIZE + FP_GUARD_EXTRA_SIZE)
+#else
+#define OT_STACK_SIZE CONFIG_OPENTHREAD_THREAD_STACK_SIZE
+#endif
 
 #if defined(CONFIG_OPENTHREAD_THREAD_PREEMPTIVE)
 #define OT_PRIORITY K_PRIO_PREEMPT(CONFIG_OPENTHREAD_THREAD_PRIORITY)

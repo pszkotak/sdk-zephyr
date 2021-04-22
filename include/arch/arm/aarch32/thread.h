@@ -57,6 +57,13 @@ struct _preempt_float {
 };
 #endif
 
+#if (MPU_GUARD_ALIGN_AND_SIZE_FLOAT > MPU_GUARD_ALIGN_AND_SIZE)
+#define FP_GUARD_EXTRA_SIZE	(MPU_GUARD_ALIGN_AND_SIZE_FLOAT - \
+				 MPU_GUARD_ALIGN_AND_SIZE)
+#else
+#define FP_GUARD_EXTRA_SIZE	0
+#endif
+
 struct _thread_arch {
 
 	/* interrupt locking key */

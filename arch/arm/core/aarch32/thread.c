@@ -16,13 +16,6 @@
 #include <ksched.h>
 #include <wait_q.h>
 
-#if (MPU_GUARD_ALIGN_AND_SIZE_FLOAT > MPU_GUARD_ALIGN_AND_SIZE)
-#define FP_GUARD_EXTRA_SIZE	(MPU_GUARD_ALIGN_AND_SIZE_FLOAT - \
-				 MPU_GUARD_ALIGN_AND_SIZE)
-#else
-#define FP_GUARD_EXTRA_SIZE	0
-#endif
-
 #if !defined(CONFIG_MULTITHREADING) && defined(CONFIG_CPU_CORTEX_M)
 extern K_THREAD_STACK_DEFINE(z_main_stack, CONFIG_MAIN_STACK_SIZE);
 #endif
